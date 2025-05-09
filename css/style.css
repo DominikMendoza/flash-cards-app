@@ -1,19 +1,5 @@
 /* Base Variables */
 :root {
-  /* Color Palette Dark */
-  --primary-color: #7389ff;
-  --primary-dark: #4a6bff;
-  --primary-light: #a5b4ff;
-  --secondary-color: #2a2d35;
-  --accent-color: #ffb300;
-  --correct-color: #5cb85c;
-  --incorrect-color: #d9534f;
-  --text-color: #e9ecef;
-  --light-text: #adb5bd;
-  --border-color: #495057;
-  --card-bg-color: #343a40;
-  --dark-bg: #212529;
-
   /* Color Palette Ligth*/
   --primary-color: #4a6bff;
   --primary-dark: #3d5ae0;
@@ -27,6 +13,20 @@
   --border-color: #dee2e6;
   --card-bg-color: #ffffff;
   --dark-bg: #343a40;
+
+  /* Color Palette Dark */
+  --primary-color: #7389ff;
+  --primary-dark: #4a6bff;
+  --primary-light: #a5b4ff;
+  --secondary-color: #2a2d35;
+  --accent-color: #ffb300;
+  --correct-color: #5cb85c;
+  --incorrect-color: #d9534f;
+  --text-color: #e9ecef;
+  --light-text: #adb5bd;
+  --border-color: #495057;
+  --card-bg-color: #343a40;
+  --dark-bg: #212529;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
