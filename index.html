@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markdown Flashcards</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Highlight.js for code syntax highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header Section -->
+      <header>
+        <h1>Markdown Flashcards</h1>
+        <p>Create and study flashcards from Markdown files</p>
+      </header>
+
+      <!-- Main Content Area -->
+      <main>
+        <!-- Import Section (Initially visible) -->
+        <section id="import-section" class="active">
+          <h2>Import Your Flashcards</h2>
+          <div class="import-container">
+            <div class="file-upload">
+              <label for="markdown-file">
+                <i class="fas fa-file-upload"></i>
+                <span>Choose a Markdown file</span>
+              </label>
+              <input
+                type="file"
+                id="markdown-file"
+                accept=".md,.markdown,text/markdown"
+              />
+            </div>
+            <div class="or-divider">
+              <span>OR</span>
+            </div>
+            <div class="text-input">
+              <label for="markdown-text">Paste your Markdown content</label>
+              <textarea
+                id="markdown-text"
+                placeholder="## What is HTML?&#10;HTML is a markup language used for structuring content on the web.&#10;&#10;## [T/F] The Earth is flat&#10;F&#10;The Earth is approximately spherical, slightly flattened at the poles."
+              ></textarea>
+            </div>
+            <button id="generate-cards" class="primary-button">
+              <i class="fas fa-magic"></i> Generate Flashcards
+            </button>
+          </div>
+          <div class="format-guide">
+            <h3>Markdown Format Guide</h3>
+            <div class="accordion">
+              <div class="accordion-item">
+                <div class="accordion-header">
+                  <span>Basic Question/Answer</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                  <pre><code>## What is HTML?
+HTML is a markup language used for structuring content on the web.</code></pre>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header">
+                  <span>True/False Question</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                  <pre><code>## [T/F] The Earth is flat
+F
+The Earth is approximately spherical, slightly flattened at the poles.</code></pre>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header">
+                  <span>Multiple Choice</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                  <pre><code>## Which of the following is a programming language?
+- [ ] HTTP
+- [x] Python
+- [ ] HTML
+- [ ] CSS
+
+Python is an interpreted high-level programming language.</code></pre>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header">
+                  <span>Concept/Definition</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                  <pre><code>## Concept: DOM
+The Document Object Model (DOM) is a programming interface for web documents.</code></pre>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header">
+                  <span>Multi-line Question</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                  <pre><code>## Explain how a for loop works in JavaScript
+A for loop is used to repeat a section of code a specific number of times.
+%
+A for loop in JavaScript has the following structure:
+
+```javascript
+for (initialization; condition; increment) {
+  // code to execute
+}
+```
+
+Where:
+- Initialization: executed before the loop starts
+- Condition: defines when the loop should continue
+- Increment: executed after each iteration</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Study Section (Initially hidden) -->
+        <section id="study-section">
+          <div class="study-header">
+            <button id="back-to-import" class="secondary-button">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <div class="stats">
+              <span class="current-card"
+                >Card <span id="current-card-num">1</span> of
+                <span id="total-cards">0</span></span
+              >
+              <span class="correct-count"
+                ><i class="fas fa-check"></i>
+                <span id="correct-count">0</span></span
+              >
+              <span class="incorrect-count"
+                ><i class="fas fa-times"></i>
+                <span id="incorrect-count">0</span></span
+              >
+            </div>
+          </div>
+
+          <div class="flashcard-container">
+            <div class="flashcard">
+              <div class="flashcard-inner">
+                <div class="flashcard-front">
+                  <!-- Front content will be inserted here -->
+                  <div id="card-front-content"></div>
+                </div>
+                <div class="flashcard-back">
+                  <!-- Back content will be inserted here -->
+                  <div id="card-back-content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-controls">
+            <button id="prev-card" class="control-button">
+              <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button id="flip-card" class="primary-button">
+              <i class="fas fa-sync-alt"></i> Flip Card
+            </button>
+            <button id="next-card" class="control-button">
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="answer-controls">
+            <button id="mark-incorrect" class="incorrect-button">
+              <i class="fas fa-times"></i> Incorrect
+            </button>
+            <button id="mark-correct" class="correct-button">
+              <i class="fas fa-check"></i> Correct
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer Section -->
+      <footer>
+        <p>
+          &copy; 2025 Markdown Flashcards |
+          <a href="#" id="help-link">Help</a> |
+          <a href="#" id="about-link">About</a>
+        </p>
+      </footer>
+
+      <!-- Help Modal (Hidden by default) -->
+      <div id="help-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2>Help</h2>
+          <h3>Getting Started</h3>
+          <ol>
+            <li>Upload a Markdown file or paste Markdown content</li>
+            <li>Click "Generate Flashcards" to create your cards</li>
+            <li>Use the navigation buttons to move between cards</li>
+            <li>Click "Flip Card" to see the answer</li>
+            <li>Mark your answer as correct or incorrect</li>
+          </ol>
+          <h3>Supported Markdown Format</h3>
+          <p>
+            See the Format Guide on the import page for examples of supported
+            card types.
+          </p>
+        </div>
+      </div>
+
+      <!-- About Modal (Hidden by default) -->
+      <div id="about-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2>About Markdown Flashcards</h2>
+          <p>
+            Markdown Flashcards is a simple web application that allows you to
+            create and study flashcards from Markdown files.
+          </p>
+          <p>
+            This application was created as an educational project to
+            demonstrate how to build a flashcard system using HTML, CSS, and
+            JavaScript.
+          </p>
+          <p>Version: 1.0.0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="js/markdown-parser.js"></script>
+    <script src="js/card-manager.js"></script>
+    <script src="js/card-renderer.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
